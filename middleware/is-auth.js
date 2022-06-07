@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 module.exports = (req, res, next) => {
   const authHeader = req.get("Authorization");
+  console.log(authHeader, "authHeader");
   if (!authHeader) {
     const error = new Error("No header found");
     error.statusCode = 404;
@@ -20,5 +21,6 @@ module.exports = (req, res, next) => {
     throw error;
   }
   req.userId = decodeToken.userId;
+  req.isAdmin = decodeToken.isAdmin;
   next();
 };

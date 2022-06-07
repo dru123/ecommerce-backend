@@ -1,6 +1,6 @@
 const Joi = require("joi");
 //using joi for validaion of incoming data in requests
-const schema = Joi.object({
+const signupLoginSchema = Joi.object({
   name: Joi.string().trim().alphanum().min(3).max(30),
   password: Joi.string()
     .trim()
@@ -16,4 +16,13 @@ const schema = Joi.object({
     .required(),
   isAdmin: Joi.boolean(),
 });
-module.exports = schema;
+const storeSchema = Joi.object({
+  name: Joi.string().trim().min(3).max(30).required(),
+  description: Joi.string().trim().min(3).max(300).required(),
+});
+const deviceSchema = Joi.object({
+  title: Joi.string().trim().min(3).max(30).required(),
+  price: Joi.number().required(),
+  description: Joi.string().trim().min(3).max(300).required(),
+});
+module.exports = { signupLoginSchema, storeSchema, deviceSchema };

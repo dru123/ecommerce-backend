@@ -7,6 +7,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
+const storeRoutes = require("./routes/store");
 //create a file for logging the events
 const accessFileStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
@@ -36,6 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // apis
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
+app.use("/store", storeRoutes);
 
 //creating error handling middleware
 app.use((error, req, res, next) => {

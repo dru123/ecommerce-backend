@@ -57,11 +57,9 @@ exports.getCartProduct = async (req, res, next) => {
       return res.status(404).json({ message: "No user found" });
     }
     const cartItems = user.cart.items;
-
-    res.render("../views/cart", {
-      path: "/cart",
-      pageTitle: "Cart",
-      products: cartItems,
+    res.status(200).json({
+      message: "successfuly get the cart",
+      cart: cartItems,
     });
   } catch (err) {
     const error = new Error(err);

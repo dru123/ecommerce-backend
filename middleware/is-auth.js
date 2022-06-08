@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
-module.exports = (req, res, next) => {
+const User = require("../models/user");
+module.exports = async (req, res, next) => {
   const authHeader = req.get("Authorization");
   console.log(authHeader, "authHeader");
   if (!authHeader) {
@@ -21,6 +22,10 @@ module.exports = (req, res, next) => {
     throw error;
   }
   req.userId = decodeToken.userId;
+  const user = await User.findById(decodeToken.userId);
+
+  req.user = user; //getbACK  mongoose model of user
+
   req.isAdmin = decodeToken.isAdmin;
   next();
 };

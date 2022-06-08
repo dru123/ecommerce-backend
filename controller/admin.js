@@ -18,7 +18,6 @@ exports.addDevice = async (req, res, next) => {
 
     //get device from database
     const storeDevices = await store.populate("devices");
-    console.log(storeDevices, "storeDevices");
     if (storeDevices.devices.length > 0) {
       //checking device should not be already exist...
       const checkExistenceDevice = storeDevices.devices.filter(

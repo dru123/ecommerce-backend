@@ -33,7 +33,8 @@ const userSchema = new Schema({
 });
 
 //creating method for adding the product into the cart
-userSchema.methods.addToCart = (product) => {
+userSchema.methods.addToCart = function (product) {
+  console.log(this.cart, product, "d");
   const productIndex = this.cart.items.findIndex((productData) => {
     //checking the whether the product is present in cart or not using id comparasion
     return productData.productId.toString() === product._id.toString();
@@ -56,21 +57,22 @@ userSchema.methods.addToCart = (product) => {
     items: newCartItems,
   };
   this.cart = newCart;
+  console.log(this.cart, "cart");
   return this.save();
 };
 
 //for removing the items in the cart
 
-userSchema.methods.removeCart = (productId) => {
-  const updatedCartItem = this.cart.items.filter(
-    (productData) => productData.productId.toString() !== productId.toString()
-  );
+userSchema.methods.removeFromCart = function (productId) {
+  const updatedCartItem = this.cart.items.filter((productData) => {
+    return productData.productId.toString() !== productId;
+  });
   this.cart.items = updatedCartItem;
   return this.save();
 };
 
 //for clearing the cart
-userSchema.methods.clearCart = () => {
+userSchema.methods.clearCart = function () {
   this.cart = { items: [] };
   return this.save();
 };

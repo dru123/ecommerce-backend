@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
 const storeRoutes = require("./routes/store");
+const User = require("./models/user");
 //create a file for logging the events
 const accessFileStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),

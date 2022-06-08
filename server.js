@@ -16,9 +16,6 @@ const accessFileStream = fs.createWriteStream(
   { flags: "a" }
 );
 
-//for sending files to the frontend use ejs
-app.set("view engine", "ejs");
-
 //using morgan which help in logging the request in the above file
 app.use(morgan("combined", { stream: accessFileStream }));
 

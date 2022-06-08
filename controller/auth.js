@@ -10,7 +10,7 @@ exports.postSignup = async (req, res, next) => {
     //checking email not already exist
     const checkEmail = await User.findOne({ email: email });
     if (checkEmail) {
-      return res.status(404).json({ message: "Email already exist" });
+      return res.status(409).json({ message: "Email already exist" });
     }
     //converting password into hash for protection
     const encryptedPassword = await bcrypt.hash(password, 12);
@@ -50,7 +50,7 @@ exports.postLogin = async (req, res, next) => {
     const isEqualPassword = await bcrypt.compare(password, user.password);
     //checking whether password is same as db or not
     if (!isEqualPassword) {
-      return res.status(404).json({ message: "Password not match" });
+      return res.status(409).json({ message: "Password not match" });
     }
 
     //jwt autenthication
@@ -75,4 +75,3 @@ exports.postLogin = async (req, res, next) => {
     next(error);
   }
 };
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhcnNoQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYyOWYzY2VlOTk5ZDdlZjlmOWI3YzE1OSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1NDYwNDcwNywiZXhwIjoxNjU0NjE5MTA3fQ.gF3fruyjDanD9y-3uo9tMNmoDZ7HWMArM_xTgjGx7XA

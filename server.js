@@ -9,11 +9,15 @@ const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
 const storeRoutes = require("./routes/store");
 const User = require("./models/user");
+
 //create a file for logging the events
 const accessFileStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
   { flags: "a" }
 );
+
+//for sending files to the frontend use ejs
+app.set("view engine", "ejs");
 
 //using morgan which help in logging the request in the above file
 app.use(morgan("combined", { stream: accessFileStream }));
@@ -52,7 +56,6 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(3000);
-    console.log("server strt");
   })
   .catch((err) => {
     console.log(err);

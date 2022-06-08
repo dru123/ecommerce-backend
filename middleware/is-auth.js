@@ -8,6 +8,7 @@ module.exports = async (req, res, next) => {
     error.statusCode = 404;
     throw error;
   }
+  //spltiting the header to get token
   const token = authHeader.split(" ")[1];
   let decodeToken;
   try {
@@ -21,6 +22,7 @@ module.exports = async (req, res, next) => {
     error.statusCode = 401;
     throw error;
   }
+  //adding user and userId to the request for making user golably avalable
   req.userId = decodeToken.userId;
   const user = await User.findById(decodeToken.userId);
 

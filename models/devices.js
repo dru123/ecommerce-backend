@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
+//creating schema for devices
 const deviceSchema = new Schema({
   title: {
     type: String,

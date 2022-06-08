@@ -1,5 +1,5 @@
 //checking for rights to manipulate database
-
+//only admin can add store and device in the database
 module.exports = (req, res, next) => {
   if (req.isAdmin) {
     console.log("I m admin");

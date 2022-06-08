@@ -1,15 +1,16 @@
-const User = require("../models/user");
 const Store = require("../models/store");
 const Device = require("../models/devices");
 const { default: mongoose } = require("mongoose");
 exports.addDevice = async (req, res, next) => {
   //converting id into the objectid
   const storeID = mongoose.Types.ObjectId(req.params.storeId);
-  console.log(storeID);
+
+  //getting the body from request
   const { title, price, description } = req.body;
   try {
     // get store from database
     const store = await Store.findById({ _id: storeID });
+
     if (!store) {
       res.status(404).json({
         message: "No Store Found",
@@ -29,7 +30,7 @@ exports.addDevice = async (req, res, next) => {
         });
       }
     }
-
+    //create device inthe db
     const device = await Device.create({
       title: title,
       price: price,
@@ -61,6 +62,7 @@ exports.addStore = async (req, res, next) => {
       devices: [],
     });
     store.save();
+    //sending response to the server
     res.status(200).json({
       message: "Store Suuccesfully created",
       storeId: store._id.toString(),

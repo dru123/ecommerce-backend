@@ -1,8 +1,6 @@
 const Device = require("../models/devices");
 const Order = require("../models/order");
 const Store = require("../models/store");
-const User = require("../models/user");
-const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 exports.getStore = async (req, res, next) => {
   //get the store from database

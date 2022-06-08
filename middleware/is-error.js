@@ -1,3 +1,4 @@
+//creating common middleware for checking the data
 const {
   signupLoginSchema,
   storeSchema,

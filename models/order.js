@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+//creating schema of orders
 const orderSchema = new Schema({
   products: [
     {

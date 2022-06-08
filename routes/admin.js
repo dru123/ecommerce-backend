@@ -4,6 +4,7 @@ const adminController = require("../controller/admin.js");
 const isAdmin = require("../middleware/is-admin");
 const isAuth = require("../middleware/is-auth.js");
 
+//for validation of incoming request data
 const {
   storeValidation,
   deviceValidation,

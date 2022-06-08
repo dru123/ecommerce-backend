@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+
+// middleware for authentication
 module.exports = async (req, res, next) => {
   const authHeader = req.get("Authorization");
   console.log(authHeader, "authHeader");
@@ -27,7 +29,6 @@ module.exports = async (req, res, next) => {
   const user = await User.findById(decodeToken.userId);
 
   req.user = user; //getbACK  mongoose model of user
-
   req.isAdmin = decodeToken.isAdmin;
   next();
 };

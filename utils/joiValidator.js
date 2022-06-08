@@ -16,10 +16,14 @@ const signupLoginSchema = Joi.object({
     .required(),
   isAdmin: Joi.boolean(),
 });
+
+//for validation store incoming req.body
 const storeSchema = Joi.object({
   name: Joi.string().trim().min(3).max(30).required(),
   description: Joi.string().trim().min(3).max(300).required(),
 });
+
+//for validation device incoming data in request
 const deviceSchema = Joi.object({
   title: Joi.string().trim().min(3).max(30).required(),
   price: Joi.number().required(),
